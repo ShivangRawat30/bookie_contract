@@ -19,7 +19,7 @@ abstract contract CodeConstants {
     uint256 public constant ETH_MAINNET_CHAIN_ID = 1;
     uint256 public constant LOCAL_CHAIN_ID = 31_337;
     uint256 public constant ETH_MAINNET_SUB_ID = 123;
-    address public constant ETH_MAINNET_OWNER_ADDRESS = 0x123;
+    address public constant ETH_MAINNET_OWNER_ADDRESS = 0x13a1C8eC74cb67AD1b828AAcC326a0031b5147cD;
 }
 
 contract HelperConfig is CodeConstants, Script {
