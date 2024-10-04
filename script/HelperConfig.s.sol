@@ -110,6 +110,20 @@ contract HelperConfig is CodeConstants, Script {
         });
     }
 
+    function getBaseEthConfig() public pure returns (NetworkConfig memory) {
+         return NetworkConfig({
+            entranceFee: 0.01 ether,
+            interval: 90,
+            vrfCoordinator: 0xd5D517aBE5cF79B7e95eC98dB0f0277788aFF634,
+            gasLane: 0xdc2f87677b01473c763cb0aee938ed3341512f6057324a584e5944e786144d70,
+            callbackGasLimit: 500_000,
+            subscriptionId: 97065945864523932416872234574061829422692607522339856463816641732357797262562,
+            maxParticipants: 50,
+            link: 0x88Fb150BDc53A65fe94Dea0c9BA0a6dAf8C6e196,
+            account: 0x13a1C8eC74cb67AD1b828AAcC326a0031b5147cD
+        });
+    }
+
         function polygonAmoyEthConfig() public pure returns (NetworkConfig memory) {
         return NetworkConfig({
             entranceFee: 0.0001 ether,
