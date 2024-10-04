@@ -167,6 +167,7 @@ contract Bookie is VRFConsumerBaseV2Plus, Pausable, AutomationCompatibleInterfac
             totalAmount: 0,
             owner: msg.sender
         });
+        s_totalLotteries=0;
     }
 
     /////////////////////

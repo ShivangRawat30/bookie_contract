@@ -56,3 +56,9 @@ addConsumer:
 
 fundSubscription:
 	@forge script script/Interactions.s.sol:FundSubscription $(NETWORK_ARGS)
+
+deploy-arbitrum :
+	@forge script script/DeployBookie.s.sol:DeployBookie --rpc-url $(ARBITRUM_RPC_URL) --account myaccount --broadcast -vvvv
+
+deploy-polygon :
+	@forge script script/DeployBookie.s.sol:DeployBookie --rpc-url $(POLYGON_RPC_URL) --account myaccount --broadcast -vvvv
