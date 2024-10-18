@@ -125,6 +125,10 @@ contract BookieTest is Test {
         assertEq(bookie.getBookieOwner(), FOUNDRY_DEFAULT_SENDER);
     }
 
+    function testOwnerEarningIsReturned() public view {
+        assertEq(bookie.getOwnerEarning(), 0);
+    }
+
     function testServicePercentageIsFive() public view {
         assertEq(bookie.getServicePercentage(), 5);
     }
@@ -561,5 +565,21 @@ contract BookieTest is Test {
         vm.expectEmit(true, false, false, false, address(bookie));
         emit Unpaused(address(FOUNDRY_DEFAULT_SENDER));
         bookie.unpause();
+    }
+
+    function testOwnerEarningIsIncreasedAfterEveryRound() public createAndEnterLottery {
+
+        vm.warp(block.timestamp + interval + 1);
+        vm.roll(block.number + 1);
+        vm.recordLogs();
+        bookie.performUpkeep("");
+        Vm.Log[] memory entries = vm.getRecordedLogs();
+        bytes32 requestId = entries[1].topics[1];
+
+        vm.prank(admin);
+        VRFCoordinatorV2_5Mock(vrfCoordinator).fulfillRandomWords(uint256(requestId), address(bookie));
+        uint256 expectedAmount = (5 * 0.02 ether) / 100;
+        uint256 actualAmount = bookie.getOwnerEarning();
+        assertEq(expectedAmount, actualAmount);
     }
 }

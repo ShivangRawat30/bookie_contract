@@ -73,9 +73,10 @@ contract Bookie is VRFConsumerBaseV2Plus, Pausable, AutomationCompatibleInterfac
     /////////////////////
 
     // bookie variables
-    uint256 private s_totalLotteries;
-    uint256 private s_totalTickets;
-    uint256 private s_randNumber;
+    uint256 private s_totalLotteries=0;
+    uint256 private s_totalTickets=0;
+    uint256 private s_randNumber=0;
+    uint256 private s_ownerEarning=0;
     LotteryStruct private s_currentLottery;
     BookieStruct private s_bookieInfo;
     // Service percentage that goes to the owner
@@ -398,6 +399,7 @@ contract Bookie is VRFConsumerBaseV2Plus, Pausable, AutomationCompatibleInterfac
         uint256 totalShares = s_currentLottery.prize;
         uint256 platformShare = (totalShares * SERVICE_PCT) / 100;
         uint256 netShare = totalShares - platformShare;
+        s_ownerEarning += platformShare;
 
         _payTo(winner, netShare);
         _payTo(owner, platformShare);
@@ -565,6 +567,14 @@ contract Bookie is VRFConsumerBaseV2Plus, Pausable, AutomationCompatibleInterfac
 
     function getBookieOwner() external view returns (address) {
         return s_bookieInfo.owner;
+    }
+    
+       /*
+    * @dev returns the owner's earning
+     */
+
+    function getOwnerEarning() external view returns (uint256) {
+        return s_ownerEarning;
     }
     /*
     * @dev returns the total volume of the protocol

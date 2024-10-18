@@ -62,3 +62,9 @@ deploy-arbitrum :
 
 deploy-polygon :
 	@forge script script/DeployBookie.s.sol:DeployBookie --rpc-url $(POLYGON_RPC_URL) --account myaccount --broadcast -vvvv
+
+deploy-basesepolia:
+	@forge script script/DeployBookie.s.sol:DeployBookie --rpc-url $(BASE_SEPOLIA_RPC_URL) --account myaccount --broadcast -vvvv
+
+deploy-base:
+	@forge script script/DeployBookie.s.sol:DeployBookie --rpc-url $(BASE_RPC_URL) --account myaccount --broadcast -vvvv
